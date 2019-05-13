@@ -140,7 +140,7 @@ Requires clicking multiple times for each spell that is available.
 #### Auto Fireball ++ (Supermacro)
 This macro will first check how long mob has before it dies and makes a smart decision as for which spell to cast. You need to first install the addon [DeathTimer](https://github.com/E1ila/DeathTimer).
 
-Decision algorythm -
+Desicion algorythm -
 * If death time (dt) is unknown, this is the begining of the fight, use Scorch
 * If there's more than 15 seconds, pop cooldowns and Fireball
 * If 3 > dt <= 15 seconds, use Fireball without cooldowns

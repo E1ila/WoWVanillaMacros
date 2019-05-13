@@ -7,7 +7,7 @@ If a macro isn't working, double check that you copied it correctly and got all 
 ## Generic
 
 #### Use Healthstone > Root Tuber (Supermacro)
-When you have a Hearthstone & Whipper Root Tuber in your bags, you want to use first HS and only if got none, use root tuber. They share the same cooldown.
+When you have a Healthstone & Whipper Root Tuber in your bags, you want to use first HS and only if got none, use root tuber. They share the same cooldown.
 This function (put on the extended box) will find an item and use it in given order -
 ```
 function FindAndUse(...)

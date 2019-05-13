@@ -150,7 +150,7 @@ Requires clicking multiple times for each trinket that is available.
 ## Warrior
 
 #### Bloodthirst / Heroic Strike
-Cursesy of Cosa. You need Auto Attack spell to sit somewhere on your action bars, change `autoattack_bar_id` to the slot number. Change 47 to 50 if you dont have talents in HS, requires [GetSpellId](#get-spell-id-by-name-supermacro) if you use Supermacro, or you replace it with the concrete spell ID.
+Cursesy of Cosa. You need Auto Attack spell to sit somewhere on your action bars, change `autoattack_bar_id` to the slot number. Change 47 to 50 if you dont have talents in HS.
 ```
 /cast Bloodthirst
 /run local autoattack_bar_id=36 if not IsCurrentAction(autoattack_bar_id) then UseAction(autoattack_bar_id) end

@@ -150,7 +150,7 @@ Requires clicking multiple times for each trinket that is available.
 ## Warrior
 
 #### Bloodthirst / Heroic Strike
-Cursesy of Cosa. Change 47 to 50 if you dont have talents in HS, requires [GetSpellId](#get-spell-id-by-name-supermacro) or you replace it with the concrete spell ID.
+Cursesy of Cosa. Change 47 to 50 if you dont have talents in HS, requires [GetSpellId](#get-spell-id-by-name-supermacro) if you use Supermacro, or you replace it with the concrete spell ID.
 ```
 /cast Bloodthirst
 /run local autoattack=GetSpellId("Auto Attack") if not IsCurrentAction(autoattack) then UseAction(autoattack) end

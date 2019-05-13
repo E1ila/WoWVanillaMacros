@@ -141,11 +141,12 @@ Requires clicking multiple times for each spell that is available.
 This macro will first check how long mob has before it dies and makes a smart decision as for which spell to cast. You need to first install the addon [DeathTimer](https://github.com/E1ila/DeathTimer).
 
 Desicion algorythm -
-* If death time (dt) is unknown, this is the begining of the fight, use Scorch
-* If there's more than 15 seconds, pop cooldowns and Fireball
-* If 3 > dt <= 15 seconds, use Fireball without cooldowns
-* If 1.5 > dt <= 3 seconds, not enough time to Fireball - use Scorch instead
-* If dt <= 1.5 seconds, no time to Scorch, use Fireblast or Scorch if on cooldown
+* If not in raid with at least 5 players, use Fireball with all cooldowns.
+* If death time (dt) is unknown, this is the begining of the fight, use Scorch.
+* If there's more than 15 seconds, pop cooldowns and Fireball.
+* If 3 > dt <= 15 seconds, use Fireball without cooldowns.
+* If 1.5 > dt <= 3 seconds, not enough time to Fireball - use Scorch instead.
+* If dt <= 1.5 seconds, no time to Scorch, use Fireblast or Scorch if on cooldown.
 
 Define this on the Extended part -
 ```

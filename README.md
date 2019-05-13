@@ -137,6 +137,51 @@ Requires clicking multiple times for each spell that is available.
 /cast Fireball
 ```
 
+#### Auto Fireball ++ (Supermacro)
+This macro will first check how long mob has before it dies and makes a smart decision as for which spell to cast. You need to first install the addon [DeathTimer](https://github.com/E1ila/DeathTimer).
+
+Decision algorythm -
+* If death time (dt) is unknown, this is the begining of the fight, use Scorch
+* If there's more than 15 seconds, pop cooldowns and Fireball
+* If 3 > dt <= 15 seconds, use Fireball without cooldowns
+* If 1.5 > dt <= 3 seconds, not enough time to Fireball - use Scorch instead
+* If dt <= 1.5 seconds, no time to Scorch, use Fireblast or Scorch if on cooldown
+
+Define this on the Extended part -
+```
+function fireballWithCooldowns() 
+  if GetInventoryItemCooldown("player",13)==0 then UseInventoryItem(13) end
+  if GetInventoryItemCooldown("player",14)==0 then UseInventoryItem(14) end 
+  if GetSpellCooldown(5,'spell')==0 then CastSpellByName("Berserking") end 
+  if GetSpellCooldown(88,'spell')==0 then CastSpellByName("Combustion") end
+  CastSpellByName("Fireball")
+end
+
+function smartFireball() 
+  if IsInInstance() and GetNumRaidMembers() >= 5 then
+    local dt = DeathTimer()
+    if not dt then 
+      CastSpellByName("Scorch")
+    elseif dt <= 1.5 then
+      CastSpellByName("Fireblast")
+      CastSpellByName("Scorch")
+    elseif dt <= 3 then 
+      CastSpellByName("Scorch")
+    elseif dt < 15 then
+      CastSpellByName("Fireball")
+    else 
+      fireballWithCooldowns()
+    end 
+  else 
+    fireballWithCooldowns()
+  end
+end 
+```
+Then paste this on the macro section - 
+```
+/run smartFireball()
+```
+
 #### Auto Frostbolt
 Use this as your main Frostbolt button, to automatically activate trinkets if available. Will **not** show error messages if any of them on cooldown! 👏🏼
 

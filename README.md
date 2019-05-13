@@ -146,3 +146,13 @@ Requires clicking multiple times for each trinket that is available.
 /run if GetInventoryItemCooldown("player",14)==0 then UseInventoryItem(14) end 
 /cast Frostbolt
 ```
+
+## Warrior
+
+#### Bloodthirst / Heroic Strike
+Cursesy of Cosa. Change 47 to 50 if you dont have talents in HS, requires [GetSpellId](#get-spell-id-by-name-supermacro)
+```
+/cast Bloodthirst
+/run local autoattack=GetSpellId("Auto Attack") if not IsCurrentAction(autoattack) then UseAction(autoattack) end
+/run if UnitMana("player")>=47 then CastSpellByName("Heroic Strike") else CastSpellByName("Bloodthirst") end
+```

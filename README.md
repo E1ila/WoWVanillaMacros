@@ -150,32 +150,63 @@ Desicion algorythm -
 
 Define this on the Extended part -
 ```
-function fireballWithCooldowns() 
-  if GetInventoryItemCooldown("player",13)==0 then UseInventoryItem(13) end
-  if GetInventoryItemCooldown("player",14)==0 then UseInventoryItem(14) end 
-  if GetSpellCooldown(5,'spell')==0 then CastSpellByName("Berserking") end 
-  if GetSpellCooldown(88,'spell')==0 then CastSpellByName("Combustion") end
-  CastSpellByName("Fireball")
+function Target(name)
+	local orig = UIErrorsFrame_OnEvent
+	UIErrorsFrame_OnEvent = function() end
+	TargetByName(name, true)
+	UIErrorsFrame_OnEvent = orig
+	local target = UnitName'target'
+	local found = target and strupper(target) == strupper(name)
+	if found then
+		TargetLastTarget()
+	end 
+	return found
 end
 
-function smartFireball() 
-  if IsInInstance() and GetNumRaidMembers() >= 5 then
-    local dt = DeathTimer()
-    if not dt then 
-      CastSpellByName("Scorch")
-    elseif dt <= 1.5 then
-      CastSpellByName("Fireblast")
-      CastSpellByName("Scorch")
-    elseif dt <= 3 then 
-      CastSpellByName("Scorch")
-    elseif dt < 15 then
-      CastSpellByName("Fireball")
-    else 
-      fireballWithCooldowns()
-    end 
-  else 
-    fireballWithCooldowns()
-  end
+function UseTrinket(slot)
+	local s,d,e = GetInventoryItemCooldown("player",slot)
+	if e==1 and s==0 then 
+		UseInventoryItem(slot)
+		return true
+	end 
+	return false
+end 
+
+function fireballWithCooldowns(withBeserking, piTarget) 
+	if not UseTrinket(13) and not UseTrinket(14) then
+		if withBeserking and GetSpellCooldown(5,'spell')==0 then 
+			CastSpellByName("Berserking") 
+			return 
+		end 
+		if GetSpellCooldown(88,'spell')==0 then 
+			CastSpellByName("Combustion") 
+			if piTarget and Target(piTarget) then
+				SendChatMessage("Ready for infusion!, "WHISPER", "Orcish", piTarget)
+			end
+			return 
+		end
+		CastSpellByName("Fireball")
+	end
+end
+
+function smartFireball(withBeserking, piTarget) 
+	if IsInInstance() and GetNumRaidMembers() >= 5 then
+		local dt = DeathTimer()
+		if not dt then 
+			CastSpellByName("Scorch")
+		elseif dt <= 1.5 then
+			CastSpellByName("Fireblast")
+			CastSpellByName("Scorch")
+		elseif dt <= 3 then 
+			CastSpellByName("Scorch")
+		elseif dt < 15 then
+			CastSpellByName("Fireball")
+		else 
+			fireballWithCooldowns(withBeserking, piTarget)
+		end 
+	else 
+		fireballWithCooldowns(withBeserking, piTarget)
+	end
 end 
 ```
 Then paste this on the macro section - 

@@ -196,7 +196,6 @@ function FireballWithCooldowns(spellName, withBeserking, piTarget)
         if GetSpellCooldown(GetSpellId("Combustion"),'spell')==0 then 
             CastSpellByName("Combustion") 
             if piTarget and Target(piTarget) then
-
                 SendChatMessage("Ready for infusion!", "WHISPER", "Orcish", piTarget)
             end
             return 
@@ -216,7 +215,7 @@ function SmartFireball(spellName, withBeserking, piTarget)
         elseif dt <= 3 then 
             CastSpellByName("Scorch")
         elseif dt < 15 then
-            CastSpellByName("Fireball")
+            CastSpellByName(spellName)
         else 
             FireballWithCooldowns(spellName, withBeserking, piTarget)
         end 

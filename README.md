@@ -187,7 +187,7 @@ function UseTrinket(slot)
     return false
 end 
 
-function fireballWithCooldowns(withBeserking, piTarget) 
+function FireballWithCooldowns(spellName, withBeserking, piTarget) 
     if not UseTrinket(13) and not UseTrinket(14) then
         if withBeserking and GetSpellCooldown(GetSpellId("Berserking"),'spell')==0 then 
             CastSpellByName("Berserking") 
@@ -201,11 +201,11 @@ function fireballWithCooldowns(withBeserking, piTarget)
             end
             return 
         end
-        CastSpellByName("Fireball")
+        CastSpellByName(spellName)
     end
 end
 
-function SmartFireball(withBeserking, piTarget) 
+function SmartFireball(spellName, withBeserking, piTarget) 
     if IsInInstance() and GetNumRaidMembers() >= 5 then
         local dt = DeathTimer()
         if not dt then 
@@ -218,20 +218,20 @@ function SmartFireball(withBeserking, piTarget)
         elseif dt < 15 then
             CastSpellByName("Fireball")
         else 
-            fireballWithCooldowns(withBeserking, piTarget)
+            FireballWithCooldowns(spellName, withBeserking, piTarget)
         end 
     else 
-        fireballWithCooldowns(withBeserking, piTarget)
+        FireballWithCooldowns(spellName, withBeserking, piTarget)
     end
 end 
 ```
 Then paste this on the macro section to whisper a priest with PI - 
 ```
-/run SmartFireball(false, "Mypriest")
+/run SmartFireball("Fireball", false, "Mypriest")
 ```
 or this without PI -
 ```
-/run SmartFireball()
+/run SmartFireball("Fireball")
 ```
 
 #### Auto Frostbolt

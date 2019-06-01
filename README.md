@@ -120,7 +120,7 @@ For Arcane Power/Frost build, with one or two power trinkets. Will also activate
 /cast Presence of Mind
 /run UseInventoryItem(13)
 /run UseInventoryItem(14)
-/run if not buffed("Arcane Power") then CastSpellByName("Arcane Power") end
+/run if not buffed("Arcane Power") and not buffed("Power Infusion") then CastSpellByName("Arcane Power") end
 /cast Berserking
 /cast Frostbolt
 ```

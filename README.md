@@ -44,6 +44,12 @@ Or you can print all spells in your book (doesn't require supermacro) -
 /script local name,rank,i; for i=1,200,1 do name,rank=GetSpellName(i,BOOKTYPE_SPELL); if name then DEFAULT_CHAT_FRAME:AddMessage(i .. " = " .. name .. " / " .. rank); end; end
 ```
 
+#### Print Target Buff's Texture Name
+Useful for buff checking, since WoW client doesn't provide the display text of the buff. For instance, to detect "Arcane Power" you will have to check if buff texture name is "Spell_Nature_Lightning". Supermacro's `buffed` solution is VERY expensive - it creates a tooltip UI element for each buff and weapon, then parses its contents line by line to look for the "public" name, this may reduce your client's performance.
+```
+for i = 1, 32 do local spell = UnitBuff("target", i) DEFAULT_CHAT_FRAME:AddMessage(spell) end
+```
+
 #### Use Item in Bags (Supermacro)
 Finds and uses an item in your bags by name -
 ```

@@ -46,8 +46,14 @@ Or you can print all spells in your book (doesn't require supermacro) -
 
 #### Print Target Buff's Texture Name
 Useful for buff checking, since WoW client doesn't provide the display text of the buff. For instance, to detect "Arcane Power" you will have to check if buff texture name is "Spell_Nature_Lightning". Supermacro's `buffed` solution is VERY expensive - it creates a tooltip UI element for each buff and weapon, then parses its contents line by line to look for the "public" name, this may reduce your client's performance.
+
+Use this to find the texture name of your desired buff -
 ```
-for i = 1, 32 do local spell = UnitBuff("target", i) DEFAULT_CHAT_FRAME:AddMessage(spell) end
+/run for i = 1, 32 do local spell = UnitBuff("target", i) DEFAULT_CHAT_FRAME:AddMessage(spell) end
+```
+then this function within your macro to see if it's on -
+```
+/run function hasBuff(unit, texture) for i = 1,32 do local tn=UnitBuff(unit, i) if texture==tn then return true end end
 ```
 
 #### Use Item in Bags (Supermacro)
